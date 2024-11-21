@@ -36,7 +36,8 @@ class SegmentationNode(Node):
         )
 
         self.rgb_sub = self.create_subscription(Image, rgb_topic, self.rgb_callback, qos_profile)
-        self.cam_info_sub = self.create_subscription(CameraInfo, cam_info_topic, self.cam_info_callback, qos_profile)
+        if cam_info_topic != 'None':
+            self.cam_info_sub = self.create_subscription(CameraInfo, cam_info_topic, self.cam_info_callback, qos_profile)
 
         self.det_pub = self.create_publisher(Image, '/detection/image', 10)
         self.seg_pub = self.create_publisher(Image, '/segmentation/image', 10)
